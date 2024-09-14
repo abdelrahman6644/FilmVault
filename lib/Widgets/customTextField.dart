@@ -32,7 +32,7 @@ class textField extends StatelessWidget {
         cursorColor: Colors.grey,
         decoration: InputDecoration(
           //isCollapsed: true,
-          suffix: Icon(icon, 
+          suffixIcon: Icon(icon, 
           color: const Color.fromARGB(255, 120, 118, 118),),
           filled: true,
           fillColor: const Color(0xff3a3f47),
