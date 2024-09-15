@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/DataBase/generes_types.dart';
 import 'package:movies_app/Widgets/popular_movies.dart';
 import 'package:movies_app/Widgets/customTextField.dart';
-import 'package:movies_app/Widgets/genere.dart';
 import 'package:movies_app/Widgets/show_movies_by_genere.dart';
-import 'package:movies_app/Widgets/show_poster_movie.dart';
+import 'package:movies_app/views/search_page.dart';
 
 class HomeBody extends StatelessWidget {
   const HomeBody({super.key});
@@ -18,6 +16,14 @@ class HomeBody extends StatelessWidget {
           hint: 'Search',
           onChanged: (String name) {},
           icon: Icons.search,
+          onFieldSubmitted: (String value) {
+            if (value.isNotEmpty) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SearchPage()),
+              );
+            }
+          },
         ),
         const SizedBox(
           height: 5,
