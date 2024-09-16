@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Services/Trending.dart';
+import 'package:movies_app/Widgets/message_error.dart';
 import 'package:movies_app/Widgets/popular_movies.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -15,7 +16,7 @@ class TrendingRow extends StatefulWidget {
 class _TrendingRowState extends State<TrendingRow> {
   // ignore: prefer_typing_uninitialized_variables
   var future;
-  bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
@@ -24,53 +25,78 @@ class _TrendingRowState extends State<TrendingRow> {
 
   @override
   Widget build(BuildContext context) {
-    return Skeletonizer(
-      enabled: isLoading,
-      child: FutureBuilder<List<MovieModel>>(
-          future: future,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              isLoading = true;
-              setState(() {});
-              return const CircularProgressIndicator();
-            }
-            if (snapshot.hasError) {
-              // ignore: avoid_print
-              print('Error: ${snapshot.error}');
-              return const Center(
-                  child: Text(
-                'There Was an Error Please try Later',
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ));
-            }
+    return FutureBuilder<List<MovieModel>>(
+        future: future,
+        builder: (context, snapshot) {
+          HandlingError screen = HandlingError(snapshot: snapshot);
+          return screen.ReturnRow();
+        });
+  }
+}
 
-            List<MovieModel> trendingMovies = [];
-            for (var movie in snapshot.data!) {
-              if (movie.poster != null) {
-                trendingMovies.add(movie);
-              }
-            }
+class HandlingError {
+  var snapshot;
+  HandlingError({required this.snapshot});
 
-            if (!snapshot.hasData ||
-                snapshot.data == null ||
-                trendingMovies.isEmpty) {
-              return Container(
-                height: 200,
-                child: const Text(
-                  'No Data Available',
-                  style: TextStyle(color: Colors.yellow, fontSize: 25),
-                ),
-              );
-            }
-            isLoading = false;
+  Widget ReturnRow() {
+    if (snapshot.hasData) {
+      return snapshotHasData(); // Return widget
+    } else if (snapshot.hasError) {
+      return snapshotHasError(); // Return widget
+    } else if (snapshot.connectionState == ConnectionState.waiting) {
+      return snapshotConnectionWaiting(); // Return widget
+    } else if (snapshot.connectionState == ConnectionState.none) {
+      return snapshotNoConnection(); // Return widget
+    } else {
+      return UnhandlingError(); // Return widget
+    }
+  }
 
-            // setState(() {});
-            return PopularMovies(
-              movies: trendingMovies,
-            );
-          }),
+  Widget snapshotHasData() {
+    List<MovieModel> trendingMovies = [];
+    for (var movie in snapshot.data!) {
+      if (movie.poster != null) {
+        trendingMovies.add(movie);
+      }
+    }
+    if (trendingMovies.isNotEmpty) {
+      return PopularMovies(
+        movies: trendingMovies,
+      );
+    } else {
+      return const Skeletonizer(
+        enabled: true,
+        child: PopularMovies(
+          movies: [],
+        ),
+      );
+    }
+  }
+
+  Widget snapshotHasError() {
+    return const MessageError(
+      Message: 'There Was an Error Please try Later',
+    );
+  }
+
+  Widget snapshotConnectionWaiting() {
+    return const Skeletonizer(
+      enabled: true,
+      child: PopularMovies(
+        movies: [],
+      ),
+    );
+  }
+
+  Widget snapshotNoConnection() {
+    return const MessageError(
+      Message: 'The Internet Lost',
+    );
+  }
+
+  Widget UnhandlingError() {
+    return const MessageError(
+      Message: 'There Was an Error Please try Later',
     );
   }
 }
