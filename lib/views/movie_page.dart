@@ -1,13 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/Models/full_movie_model.dart';
+import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
 import 'package:movies_app/constants.dart';
 
 class MoviePage extends StatelessWidget {
-  const MoviePage({super.key});
-
+  MoviePage({super.key, required this.movie});
+  FullMovieModel movie;
   @override
   Widget build(BuildContext context) {
+    List<Widget> Generes = [];
+    // movie.FirstGenre != "" ? Generes.add(movie.FirstGenre!) : "";
+    // movie.SecondGenre != "" ? Generes.add(movie.SecondGenre!) : "";
+    // movie.ThirdGenre != "" ? Generes.add(movie.ThirdGenre!) : "";
+    List<Widget> genere() {
+      for (var v in movie.finalGeneres) {
+        Generes.add(Text(
+          v,
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 14.sp,
+          ),
+        ));
+      }
+      return Generes;
+    }
+
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
@@ -17,7 +36,7 @@ class MoviePage extends StatelessWidget {
           backgroundColor: const Color(primaryColor),
           appBar: AppBar(
             iconTheme: const IconThemeData(
-              color: Colors.cyan, //change your color here
+              color: Colors.cyan,
             ),
             title: const Row(
               children: [
@@ -43,8 +62,9 @@ class MoviePage extends StatelessWidget {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                const TopOfPage(),
-                
+                TopOfPage(
+                  movie: movie,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -54,7 +74,7 @@ class MoviePage extends StatelessWidget {
                       size: 14.sp,
                     ),
                     Text(
-                      ' 2021',
+                      ' ${movie.release_date != null && movie.release_date!.length >= 4 ? movie.release_date!.substring(0, 4) : 'Unknown'}',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.sp,
@@ -73,7 +93,7 @@ class MoviePage extends StatelessWidget {
                       size: 14.sp,
                     ),
                     Text(
-                      ' 148 minutes',
+                      ' ${movie.runtime} minutes',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.sp,
@@ -86,18 +106,9 @@ class MoviePage extends StatelessWidget {
                         fontSize: 14.sp,
                       ),
                     ),
-                    Icon(
-                      Icons.movie_rounded,
-                      color: Colors.grey,
-                      size: 14.sp,
-                    ),
-                    Text(
-                      ' Action',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
-                    ),
+                    Column(
+                      children: genere(),
+                    )
                   ],
                 ),
                 Container(
@@ -129,7 +140,7 @@ class MoviePage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(14),
                   child: Text(
-                    'dslfgohdsf hedsf dsfhds klhfds dshf lsdhf fdshfh sdfhdslfhsdfhsf sdffhdshf dshf shf dhsf hsdhfsdhfsdhfsldhlfshdff dfs f s dsf sdfds fd',
+                    movie.overview!,
                     style: TextStyle(color: Colors.white, fontSize: 16.sp),
                   ),
                 )
@@ -142,13 +153,25 @@ class MoviePage extends StatelessWidget {
   }
 }
 
-class TopOfPage extends StatelessWidget {
-  const TopOfPage({
-    super.key,
-  });
+/*
+                        Text(
+                          movie.FirstGenre ?? "",
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.sp,
+                          ),
+                        )
+*/
 
+class TopOfPage extends StatelessWidget {
+  TopOfPage({super.key, required this.movie});
+  FullMovieModel movie;
   @override
   Widget build(BuildContext context) {
+    double d = movie.vote_average;
+    String movieVote = d.toStringAsFixed(2);
+    String poster = posterUrl + movie.poster!;
+    String background = posterUrl + movie.backGround!;
     return SizedBox(
       height: 300.h,
       child: Stack(
@@ -158,11 +181,9 @@ class TopOfPage extends StatelessWidget {
             height: 210.h,
             width: double.infinity,
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/IMG_20240216_090640.jpg'),
-                      fit: BoxFit.cover
-                      ),
+                      image: NetworkImage(background), fit: BoxFit.cover),
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(13))),
             ),
@@ -172,8 +193,8 @@ class TopOfPage extends StatelessWidget {
             left: MediaQuery.of(context).size.width / 11,
             child: Container(
               alignment: Alignment.bottomLeft,
-              child: ShowPoster(
-                Imageurl: 'assets/IMG_20240216_090640.jpg',
+              child: ShowPosterToDetailes(
+                Imageurl: poster,
                 height: 140,
                 width: 100,
               ),
@@ -183,9 +204,9 @@ class TopOfPage extends StatelessWidget {
             top: 280,
             left: 140.sp,
             width: 230.w,
-            child: const Text(
-              'SpiderMan : No Way Home',
-              style: TextStyle(
+            child: Text(
+              movie.original_title!,
+              style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
                 color: Colors.white,
@@ -202,26 +223,26 @@ class TopOfPage extends StatelessWidget {
                   color: Color(0xff373740),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Row(
+                child: Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 3,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.star_border,
                       color: Colors.orange,
                       size: 22,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 3,
                     ),
                     Text(
-                      '9.0',
-                      style: TextStyle(
+                      movieVote,
+                      style: const TextStyle(
                         color: Colors.orange,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 3,
                     ),
                   ],

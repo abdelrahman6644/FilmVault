@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/Models/movie_model.dart';
-import 'package:movies_app/Services/trending_api.dart';
+import 'package:movies_app/Services/APIs/trending_api.dart';
 import 'package:movies_app/Widgets/handling_error.dart';
 class TrendingRow extends StatefulWidget {
   const TrendingRow({super.key});

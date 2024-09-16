@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
 
 class MovieCard extends StatelessWidget {
-  const MovieCard({super.key});
-
+  MovieCard({super.key});
+  MovieModel movie = MovieModel(poster: '', id: 3);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +18,8 @@ class MovieCard extends StatelessWidget {
             child: ShowPoster(
               Imageurl: 'https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp',
               height: 120,
-              width: 100,
+              width: 100, 
+              movie: movie ,
             ),
           ),
           Container(

@@ -30,6 +30,7 @@ class ViewInRow extends StatelessWidget {
               Imageurl: posterUrl + movies[index].poster!,
               height: 230,
               width: 140,
+              movie: movies[index],
             );
           },
         ),

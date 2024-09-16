@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/DataBase/generes_types.dart';
+import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/genere.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
 
@@ -8,6 +9,8 @@ class ShowMoviesByGenere extends StatefulWidget {
     super.key,
     this.currentGenere = 0,
   });
+    MovieModel movie = MovieModel(poster: '', id: 0);
+
   int currentGenere;
   @override
   State<ShowMoviesByGenere> createState() => _ShowMoviesByGenereState();
@@ -54,7 +57,7 @@ class _ShowMoviesByGenereState extends State<ShowMoviesByGenere> {
                 Imageurl:
                     'https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp',
                 height: 200,
-                width: 110,
+                width: 110, movie: widget.movie,
               ),
             ),
           ),
