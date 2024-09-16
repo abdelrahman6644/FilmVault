@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/Models/movie_model.dart';
-import 'package:movies_app/Services/Trending.dart';
+import 'package:movies_app/Services/trending_api.dart';
 import 'package:movies_app/Widgets/popular_movies.dart';
 import 'package:movies_app/Widgets/customTextField.dart';
 import 'package:movies_app/Widgets/show_movies_by_genere.dart';
 import 'package:movies_app/Widgets/trending_view_builder.dart';
+import 'package:movies_app/Widgets/upcoming_view_builder.dart';
 import 'package:movies_app/views/search_page.dart';
 
 class HomeBody extends StatelessWidget {
@@ -62,7 +63,7 @@ class HomeBody extends StatelessWidget {
             Spacer(),
           ],
         ),
-        // const PopularMovies(movie: null,),
+        const UpcomingRow(),
         ShowMoviesByGenere(),
       ]),
     );

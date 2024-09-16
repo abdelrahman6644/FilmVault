@@ -1,28 +1,26 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/Models/movie_model.dart';
-import 'package:movies_app/Services/trending_api.dart';
+import 'package:movies_app/Services/APIs/upcoming_api.dart';
 import 'package:movies_app/Widgets/handling_error.dart';
-class TrendingRow extends StatefulWidget {
-  const TrendingRow({super.key});
+
+class UpcomingRow extends StatefulWidget {
+  const UpcomingRow({super.key});
 
   @override
-  State<TrendingRow> createState() => _TrendingRowState();
+  State<UpcomingRow> createState() => _UpcomingRowState();
 }
 
-class _TrendingRowState extends State<TrendingRow> {
-  // ignore: prefer_typing_uninitialized_variables
+class _UpcomingRowState extends State<UpcomingRow> {
   var future;
-
   @override
   void initState() {
     super.initState();
-    future = TrendingApi(Dio()).getTrending();
+    future = UpcomingApi(Dio()).getUpcomingMovies();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<MovieModel>>(
+    return FutureBuilder(
         future: future,
         builder: (context, snapshot) {
           HandlingError screen = HandlingError(snapshot: snapshot);

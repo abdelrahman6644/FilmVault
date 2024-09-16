@@ -3,8 +3,8 @@ import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
 import 'package:movies_app/constants.dart';
 
-class PopularMovies extends StatelessWidget {
-  const PopularMovies({
+class ViewInRow extends StatelessWidget {
+  const ViewInRow({
     super.key,
     required this.movies,
   });
