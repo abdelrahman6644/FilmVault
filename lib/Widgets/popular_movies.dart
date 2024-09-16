@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
+import 'package:movies_app/constants.dart';
 
 class PopularMovies extends StatelessWidget {
   const PopularMovies({
     super.key,
+    required this.movies,
   });
+  final List<MovieModel> movies;
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +20,14 @@ class PopularMovies extends StatelessWidget {
         ),
         height: 230,
         child: ListView.separated(
-          separatorBuilder: (context, index) => SizedBox(width: 30,),
+          separatorBuilder: (context, index) => SizedBox(
+            width: 30,
+          ),
           scrollDirection: Axis.horizontal,
-          itemCount: 3,
+          itemCount: movies.length,
           itemBuilder: (context, index) {
             return ShowPoster(
-              Imageurl: 'assets/IMG_20240216_090640.jpg',
+              Imageurl: posterUrl + movies[index].poster!,
               height: 230,
               width: 140,
             );

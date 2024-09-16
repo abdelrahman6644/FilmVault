@@ -1,12 +1,15 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/Models/movie_model.dart';
+import 'package:movies_app/Services/Trending.dart';
 import 'package:movies_app/Widgets/popular_movies.dart';
 import 'package:movies_app/Widgets/customTextField.dart';
 import 'package:movies_app/Widgets/show_movies_by_genere.dart';
+import 'package:movies_app/Widgets/trending_view_builder.dart';
 import 'package:movies_app/views/search_page.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({super.key});
-
+  HomeBody({super.key});
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -43,7 +46,7 @@ class HomeBody extends StatelessWidget {
             Spacer(),
           ],
         ),
-        const PopularMovies(),
+        const TrendingRow(),
         const Row(
           children: [
             SizedBox(
@@ -59,7 +62,7 @@ class HomeBody extends StatelessWidget {
             Spacer(),
           ],
         ),
-        const PopularMovies(),
+        // const PopularMovies(movie: null,),
         ShowMoviesByGenere(),
       ]),
     );

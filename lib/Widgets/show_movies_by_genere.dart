@@ -5,7 +5,8 @@ import 'package:movies_app/Widgets/show_poster_movie.dart';
 
 class ShowMoviesByGenere extends StatefulWidget {
   ShowMoviesByGenere({
-    super.key, this.currentGenere = 0,
+    super.key,
+    this.currentGenere = 0,
   });
   int currentGenere;
   @override
@@ -24,12 +25,14 @@ class _ShowMoviesByGenereState extends State<ShowMoviesByGenere> {
             scrollDirection: Axis.horizontal,
             itemCount: genres.length,
             itemBuilder: (context, index) => GestureDetector(
-              onTap: (){
-                widget.currentGenere = index;
-                setState(() {});
-              },
-              child: Genere(id: index, isActive:widget.currentGenere == index ,)
-              ),
+                onTap: () {
+                  widget.currentGenere = index;
+                  setState(() {});
+                },
+                child: Genere(
+                  id: index,
+                  isActive: widget.currentGenere == index,
+                )),
           ),
         ),
         Padding(
@@ -44,17 +47,19 @@ class _ShowMoviesByGenereState extends State<ShowMoviesByGenere> {
               childAspectRatio: 0.7,
               mainAxisSpacing: 0,
               crossAxisSpacing: 16,
-              ), 
-                
+            ),
             itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.only(top:16.0),
+              padding: const EdgeInsets.only(top: 16.0),
               child: ShowPoster(
-                Imageurl: 'assets/IMG_20240216_090640.jpg', 
+                Imageurl:
+                    'https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp',
                 height: 200,
-                width: 110,),
-            ),),
+                width: 110,
+              ),
+            ),
+          ),
         ),
       ],
-      );
+    );
   }
 }

@@ -15,7 +15,7 @@ class MovieCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: ShowPoster(
-              Imageurl: 'assets/IMG_20240216_090640.jpg',
+              Imageurl: 'https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp',
               height: 120,
               width: 100,
             ),
