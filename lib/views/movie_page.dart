@@ -183,7 +183,9 @@ class TopOfPage extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: NetworkImage(background), fit: BoxFit.cover),
+                      image: NetworkImage(background), 
+                      fit: BoxFit.cover,
+                      ),
                   borderRadius:
                       BorderRadius.vertical(bottom: Radius.circular(13))),
             ),

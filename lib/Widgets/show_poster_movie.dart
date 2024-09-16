@@ -65,7 +65,10 @@ class ShowPosterToDetailes extends StatelessWidget {
         height: height.sp,
         decoration: BoxDecoration(
           image:
-              DecorationImage(image: NetworkImage(Imageurl), fit: BoxFit.cover),
+              DecorationImage(
+                image: NetworkImage(Imageurl),
+                fit: BoxFit.cover
+                ),
           borderRadius: BorderRadius.circular(25),
         ),
       ),
