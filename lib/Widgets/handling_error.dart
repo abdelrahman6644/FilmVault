@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/message_error.dart';
 import 'package:movies_app/Widgets/popular_movies.dart';
-import 'package:movies_app/constants.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class HandlingError {
   var snapshot;
@@ -47,10 +46,13 @@ class HandlingError {
   }
 
   Widget snapshotConnectionWaiting() {
-    return Skeletonizer(
-      enabled: true,
-      child: ViewInRow(
-        movies: [DefaultFullMod, DefaultFullMod, DefaultFullMod],
+    return SizedBox(
+      height: 214.h,
+      child: const Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(child: CircularProgressIndicator()),
+        ],
       ),
     );
   }

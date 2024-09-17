@@ -22,7 +22,7 @@ class ReviewMesssage extends StatelessWidget {
             width: 0.1,
           ),
           boxShadow:
-              List.filled(10, BoxShadow(blurRadius: 0, color: Colors.black45)),
+              List.filled(10, const BoxShadow(blurRadius: 0, color: Colors.black45)),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Column(
@@ -36,7 +36,7 @@ class ReviewMesssage extends StatelessWidget {
                   ),
                   Text(
                     Username,
-                    style: TextStyle(color: Color(0xffF5F5DC), fontSize: 18.sp),
+                    style: TextStyle(color: const Color(0xffF5F5DC), fontSize: 18.sp),
                   ),
                   const Spacer(
                     flex: 6,

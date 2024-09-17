@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/MoviePageParts/movie_view_builder.dart';
-import 'package:movies_app/views/movie_page.dart';
 
 class ShowPoster extends StatelessWidget {
   ShowPoster({

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/views/search_page.dart';
 
 class textField extends StatelessWidget {
   textField(

@@ -5,7 +5,7 @@ class MessageError extends StatelessWidget {
   final String Message;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 230,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

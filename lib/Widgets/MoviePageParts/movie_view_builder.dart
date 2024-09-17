@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
 import 'package:movies_app/Services/APIs/movie_detailes_api.dart';
 import 'package:movies_app/Widgets/message_error.dart';
-import 'package:movies_app/Widgets/popular_movies.dart';
 import 'package:movies_app/constants.dart';
 import 'package:movies_app/views/movie_page.dart';
 import 'package:skeletonizer/skeletonizer.dart';

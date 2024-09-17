@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/movie_card.dart';
 import 'package:movies_app/Widgets/MoviePageParts/movie_view_builder.dart';
-import 'package:movies_app/views/movie_page.dart';
 
 class MoviesList extends StatefulWidget {
   MoviesList({super.key});
@@ -25,7 +24,7 @@ class _MoviesListState extends State<MoviesList> {
       ),
       child: ListView.builder(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: 5,
         itemBuilder: (context, index) => MovieCard(),
       ),
