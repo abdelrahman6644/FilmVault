@@ -17,7 +17,6 @@ class ReviewsGroup extends StatefulWidget {
   State<ReviewsGroup> createState() => _ReviewsGroupState();
 }
 
-
 class _ReviewsGroupState extends State<ReviewsGroup> {
   var future;
   @override
@@ -35,15 +34,17 @@ class _ReviewsGroupState extends State<ReviewsGroup> {
           return SizedBox(
             height: MediaQuery.of(context).size.height / 1.2,
             child: ListView.builder(
-              // scrollDirection: Axis.vertical,
-              // physics: PageScrollPhysics(),
               itemCount: snapshot.data != null ? snapshot.data!.length : 0,
               itemBuilder: (context, index) {
-                return ReviewMesssage(
-                  Username: snapshot.data![index].author,
-                  Rate: snapshot.data![index].rating,
-                  content: snapshot.data![index].content,
-                );
+                return snapshot.data != null
+                    ? ReviewMesssage(
+                        Username: snapshot.data![index].author,
+                        Rate: snapshot.data![index].rating,
+                        content: snapshot.data![index].content,
+                      )
+                    : const MessageError(
+                        Message: 'No Reviews Found',
+                      );
               },
             ),
           );
