@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/movie_card.dart';
-import 'package:movies_app/Widgets/movie_view_builder.dart';
+import 'package:movies_app/Widgets/MoviePageParts/movie_view_builder.dart';
 import 'package:movies_app/views/movie_page.dart';
 
 class MoviesList extends StatefulWidget {

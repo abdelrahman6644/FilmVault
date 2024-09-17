@@ -22,7 +22,7 @@ class MovieCard extends StatelessWidget {
               movie: movie ,
             ),
           ),
-          Container(
+          SizedBox(
             width: 230,
             child: Column(
               children: [
@@ -33,7 +33,7 @@ class MovieCard extends StatelessWidget {
                       fontSize: 20.sp,
                       overflow: TextOverflow.ellipsis),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 17,
                 ),
                 Row(

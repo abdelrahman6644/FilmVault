@@ -29,7 +29,7 @@ class _MovieViewState extends State<MovieView> {
         future: future,
         builder: (context, snapshot) {
           HandlingError screen = HandlingError(snapshot: snapshot);
-          return screen.ReturnRow();
+          return screen.ReturnMovie();
         });
   }
 }
@@ -39,21 +39,16 @@ class HandlingError {
 
   HandlingError({required this.snapshot});
 
-  Widget ReturnRow() {
+  Widget ReturnMovie() {
     if (snapshot.hasData) {
       return snapshotHasData(); // Return widget
+    } else if (snapshot.connectionState == ConnectionState.waiting) {
+      return snapshotConnectionWaiting(); // Return widget
+    } else if (snapshot.connectionState == ConnectionState.none) {
+      return snapshotNoConnection(); // Return widget
     } else {
-      return snapshotHasData(); // Return widget
+      return UnhandlingError(); // Return widget
     }
-    //  if (snapshot.hasError) {
-    //   return snapshotHasError(); // Return widget
-    // }else if (snapshot.connectionState == ConnectionState.waiting) {
-    //   return snapshotConnectionWaiting(); // Return widget
-    // } else if (snapshot.connectionState == ConnectionState.none) {
-    //   return snapshotNoConnection(); // Return widget
-    // } else {
-    //   return UnhandlingError(); // Return widget
-    // }
   }
 
   Widget snapshotHasData() {

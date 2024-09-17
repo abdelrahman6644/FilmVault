@@ -1,6 +1,6 @@
 class FullMovieModel {
   String poster;
-  int? id;
+  int id;
   String? original_title;
   String backGround;
   String? release_date;

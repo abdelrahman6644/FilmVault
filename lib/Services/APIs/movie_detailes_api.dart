@@ -15,7 +15,6 @@ class MovieApi {
       Movies = FullMovieModel.fromJson(movie);
       if (Movies.Generes != null) {
         for (var gen in Movies.Generes!) {
-          print(gen["name"]);
           if (gen["name"] != null) {
             Movies.finalGeneres.add(gen["name"]);
           }

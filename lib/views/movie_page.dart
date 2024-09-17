@@ -1,9 +1,16 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
-import 'package:movies_app/Models/movie_model.dart';
-import 'package:movies_app/Widgets/show_poster_movie.dart';
+import 'package:movies_app/Models/review_model.dart';
+import 'package:movies_app/Services/APIs/review_api.dart';
+import 'package:movies_app/Widgets/MoviePageParts/review_messsage.dart';
+import 'package:movies_app/Widgets/MoviePageParts/row_in_moviepage.dart';
+import 'package:movies_app/Widgets/message_error.dart';
+
 import 'package:movies_app/constants.dart';
+import 'package:movies_app/Widgets/MoviePageParts/top_of_movie_page.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class MoviePage extends StatelessWidget {
   MoviePage({super.key, required this.movie});
@@ -111,39 +118,9 @@ class MoviePage extends StatelessWidget {
                     )
                   ],
                 ),
-                Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.only(top: 40, left: 15),
-                  child: const Text(
-                    'About Movie',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
+                UnderPage(
+                  movie: movie,
                 ),
-                const Row(
-                  children: [
-                    SizedBox(
-                      width: 12,
-                    ),
-                    SizedBox(
-                      width: 115,
-                      child: Divider(
-                        color: Color(0xFF3a3f47),
-                        height: 15,
-                        thickness: 4,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  padding: const EdgeInsets.all(14),
-                  child: Text(
-                    movie.overview!,
-                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                  ),
-                )
               ],
             ),
           ),
@@ -153,126 +130,135 @@ class MoviePage extends StatelessWidget {
   }
 }
 
-/*
-                        Text(
-                          movie.FirstGenre ?? "",
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14.sp,
-                          ),
-                        )
-*/
-
-class TopOfPage extends StatelessWidget {
-  TopOfPage({super.key, required this.movie});
+class UnderPage extends StatefulWidget {
+  UnderPage({super.key, required this.movie});
   FullMovieModel movie;
+  bool isActive = true;
+  @override
+  State<UnderPage> createState() => _UnderPageState();
+}
+
+class _UnderPageState extends State<UnderPage> {
   @override
   Widget build(BuildContext context) {
-    double d = movie.vote_average;
-    String movieVote = d.toStringAsFixed(2);
-    String poster =   movie.poster;
-    String background = movie.backGround;
-    return SizedBox(
-      height: 300.h,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          SizedBox(
-            height: 210.h,
-            width: double.infinity,
-            child: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(background), 
-                      fit: BoxFit.cover,
-                      ),
-                  borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(13))),
+    return Column(
+      children: [
+        Row(
+          children: [
+            const Spacer(
+              flex: 1,
             ),
-          ),
-          Positioned(
-            top: 190,
-            left: MediaQuery.of(context).size.width / 11,
-            child: Container(
-              alignment: Alignment.bottomLeft,
-              child: ShowPosterToDetailes(
-                Imageurl: poster,
-                height: 140,
-                width: 100,
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget.isActive = true;
+                });
+              },
+              child: RowInMoviepage(
+                index: 0,
+                text: 'About Movie',
+                isActive: widget.isActive,
               ),
             ),
-          ),
-          Positioned(
-            top: 280,
-            left: 140.sp,
-            width: 230.w,
-            child: Text(
-              movie.original_title!,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w500,
-                color: Colors.white,
+            const Spacer(
+              flex: 4,
+            ),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget.isActive = false;
+                });
+              },
+              child: RowInMoviepage(
+                index: 1,
+                text: 'Reviews',
+                isActive: !(widget.isActive),
               ),
             ),
-          ),
-          Positioned(
-              top: 200.sp,
-              left: 300.sp,
-              child: Container(
-                width: 60,
-                height: 28,
-                decoration: BoxDecoration(
-                  color: Color(0xff373740),
-                  borderRadius: BorderRadius.circular(8),
+            const Spacer(
+              flex: 2,
+            ),
+          ],
+        ),
+        widget.isActive
+            ? Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  widget.movie.overview ?? "",
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 3,
-                    ),
-                    const Icon(
-                      Icons.star_border,
-                      color: Colors.orange,
-                      size: 22,
-                    ),
-                    const SizedBox(
-                      width: 3,
-                    ),
-                    Text(
-                      movieVote,
-                      style: const TextStyle(
-                        color: Colors.orange,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 3,
-                    ),
-                  ],
-                ),
-              ))
-        ],
-      ),
+              )
+            : ReviewsGroup(
+                id: widget.movie.id,
+              ),
+      ],
     );
   }
 }
 
-// bool isFav = false;
+class ReviewsGroup extends StatefulWidget {
+  ReviewsGroup({
+    super.key,
+    required this.id,
+  });
+  int id;
 
-// IconButton(
-//   icon: isFav == false
-//       ? const Icon(
-//           Icons.favorite,
-//           color: Colors.red,
-//           size: 30,
-//         )
-//       : const Icon(
-//           Icons.favorite_border,
-//           color: Colors.red,
-//           size: 30,
-//         ),
-//   onPressed: () {
-//     setState(() {
-//       isFav ? false : true;
-//     });
-//   },
-// )
+  @override
+  State<ReviewsGroup> createState() => _ReviewsGroupState();
+}
+
+class _ReviewsGroupState extends State<ReviewsGroup> {
+  var future;
+  @override
+  void initState() {
+    super.initState();
+    future = ReviewService(Dio()).getReview(widget.id);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<ReviewModel>>(
+      future: future,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return SizedBox(
+            height: MediaQuery.of(context).size.height / 1.2,
+            child: ListView.builder(
+              // scrollDirection: Axis.vertical,
+              // physics: PageScrollPhysics(),
+              itemCount: snapshot.data != null ? snapshot.data!.length : 0,
+              itemBuilder: (context, index) {
+                return ReviewMesssage(
+                  Username: snapshot.data![index].author,
+                  Rate: snapshot.data![index].rating,
+                  content: snapshot.data![index].content,
+                );
+              },
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return const MessageError(
+            Message: 'There Was an Error Please try Later',
+          );
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          return Column(
+            children: [
+              SizedBox(
+                height: 40.h,
+              ),
+              const Center(child: CircularProgressIndicator()),
+            ],
+          );
+        } else if (snapshot.connectionState == ConnectionState.none) {
+          return const MessageError(
+            Message: 'There Was an Error Please try Later',
+          );
+        } else {
+          return const MessageError(
+            Message: 'There Was an Error Please try Later',
+          );
+        }
+      },
+    );
+  }
+}
