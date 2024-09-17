@@ -12,7 +12,7 @@ class ShowPoster extends StatelessWidget {
     required this.width,
     required this.movie,
   });
-  String Imageurl;
+  String? Imageurl;
   final int width;
   final int height;
   MovieModel movie;
@@ -36,7 +36,7 @@ class ShowPoster extends StatelessWidget {
           height: height.sp,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: NetworkImage(Imageurl), fit: BoxFit.cover),
+                image: NetworkImage(Imageurl!), fit: BoxFit.cover),
             borderRadius: BorderRadius.circular(25),
           ),
         ),

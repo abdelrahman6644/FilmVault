@@ -14,7 +14,12 @@ class TrendingApi {
   List<MovieModel> trendingMovies = [];
   for(var movie in Movies){
     trendingMovies.add(MovieModel.fromJson(movie));
-      }
+    }
+    for(var mo in trendingMovies){
+      mo.poster = posterUrl + mo.poster;
+    }
+      
+
     return trendingMovies;
 } catch (e) {
   return [];

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
-import 'package:movies_app/constants.dart';
-
 class ViewInRow extends StatelessWidget {
   const ViewInRow({
     super.key,
@@ -20,14 +18,14 @@ class ViewInRow extends StatelessWidget {
         ),
         height: 230,
         child: ListView.separated(
-          separatorBuilder: (context, index) => SizedBox(
+          separatorBuilder: (context, index) => const SizedBox(
             width: 30,
           ),
           scrollDirection: Axis.horizontal,
           itemCount: movies.length,
           itemBuilder: (context, index) {
             return ShowPoster(
-              Imageurl: posterUrl + movies[index].poster!,
+              Imageurl:  movies[index].poster,
               height: 230,
               width: 140,
               movie: movies[index],

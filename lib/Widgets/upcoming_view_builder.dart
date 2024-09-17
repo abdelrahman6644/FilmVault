@@ -15,7 +15,7 @@ class _UpcomingRowState extends State<UpcomingRow> {
   @override
   void initState() {
     super.initState();
-    future = UpcomingApi(Dio()).getUpcomingMovies();
+    future = UpcomingApi(Dio(), type: 'upcoming').getUpcomingMovies();
   }
 
   @override

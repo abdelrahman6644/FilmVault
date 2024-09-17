@@ -1,4 +1,5 @@
 import 'package:movies_app/Models/full_movie_model.dart';
+import 'package:movies_app/Models/movie_model.dart';
 
 const int primaryColor = 0xff242a32;
 
@@ -17,4 +18,9 @@ FullMovieModel DefaultMod = FullMovieModel(
   // FirstGenre: '',
   // SecondGenre: '',
   // ThirdGenre: '',
+);
+
+MovieModel DefaultFullMod = MovieModel(
+  poster: 'https://lumiere-a.akamaihd.net/v1/images/p_cars_19643_4405006d.jpeg',
+  id: 0,
 );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/message_error.dart';
 import 'package:movies_app/Widgets/popular_movies.dart';
+import 'package:movies_app/constants.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class HandlingError {
@@ -10,20 +11,21 @@ class HandlingError {
 
   Widget ReturnRow() {
     if (snapshot.hasData) {
-      return snapshotHasData(); // Return widget
+      return snapshotHasData();
     } else if (snapshot.hasError) {
-      return snapshotHasError(); // Return widget
+      return snapshotHasError();
     } else if (snapshot.connectionState == ConnectionState.waiting) {
-      return snapshotConnectionWaiting(); // Return widget
+      return snapshotConnectionWaiting();
     } else if (snapshot.connectionState == ConnectionState.none) {
-      return snapshotNoConnection(); // Return widget
+      return snapshotNoConnection();
     } else {
-      return UnhandlingError(); // Return widget
+      return UnhandlingError();
     }
   }
 
   Widget snapshotHasData() {
     List<MovieModel> Movies = [];
+    // return snapshotConnectionWaiting();
     for (var movie in snapshot.data!) {
       if (movie.poster is String) {
         Movies.add(movie);
@@ -34,12 +36,7 @@ class HandlingError {
         movies: Movies,
       );
     } else {
-      return const Skeletonizer(
-        enabled: true,
-        child: ViewInRow(
-          movies: [],
-        ),
-      );
+      return snapshotConnectionWaiting();
     }
   }
 
@@ -50,10 +47,10 @@ class HandlingError {
   }
 
   Widget snapshotConnectionWaiting() {
-    return const Skeletonizer(
+    return Skeletonizer(
       enabled: true,
       child: ViewInRow(
-        movies: [],
+        movies: [DefaultFullMod, DefaultFullMod, DefaultFullMod],
       ),
     );
   }
