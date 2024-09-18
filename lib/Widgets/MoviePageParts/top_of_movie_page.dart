@@ -10,8 +10,8 @@ class TopOfPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double d = movie.vote_average;
     String movieVote = d.toStringAsFixed(2);
-    String poster = movie.poster;
-    String background = movie.backGround;
+    String poster = movie.poster!;
+    String background = movie.backGround!;
     return SizedBox(
       height: 300.h,
       child: Stack(

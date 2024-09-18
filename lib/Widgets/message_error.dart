@@ -12,7 +12,8 @@ class MessageError extends StatelessWidget {
         children: [
           Text(
             Message,
-            style: const TextStyle(fontSize: 25, color: Colors.yellowAccent),
+            style: const TextStyle(
+                fontSize: 25, color: Color.fromARGB(255, 231, 231, 133)),
           ),
         ],
       ),

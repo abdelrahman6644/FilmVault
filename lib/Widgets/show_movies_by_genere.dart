@@ -92,7 +92,7 @@ class _GenereBuilderState extends State<GenereBuilder> {
                     Imageurl: posterUrl + (snapshot.data?[index].poster ?? ""),
                     height: 200,
                     width: 110,
-                    movie: snapshot.data![index],
+                    movieID: snapshot.data![index].id??0,
                   ),
                 ),
               );

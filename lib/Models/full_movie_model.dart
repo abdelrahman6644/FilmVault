@@ -1,17 +1,14 @@
 class FullMovieModel {
-  String poster;
+  String? poster;
   int id;
   String? original_title;
-  String backGround;
+  String? backGround;
   String? release_date;
-  int runtime;
+  int? runtime;
   String? overview;
   double vote_average;
   List? Generes;
   List finalGeneres = [];
-  // String? FirstGenre;
-  // String? SecondGenre;
-  // String? ThirdGenre;
   FullMovieModel(
       {required this.poster,
       required this.id,
@@ -21,9 +18,6 @@ class FullMovieModel {
       required this.runtime,
       required this.overview,
       required this.Generes,
-      // required this.FirstGenre,
-      // required this.SecondGenre,
-      // required this.ThirdGenre,
       required this.vote_average});
   factory FullMovieModel.fromJson(json) {
     return FullMovieModel(
@@ -32,13 +26,10 @@ class FullMovieModel {
       original_title: json["original_title"],
       backGround: json["backdrop_path"],
       release_date: json["release_date"],
-      runtime: json["runtime"],
+      runtime: json["runtime"] ?? 0,
       overview: json["overview"],
-      Generes: json["genres"],
-      // FirstGenre: json["genres"][0]["name"]?? "",
-      // SecondGenre: json["genres"][1]["name"]??"",
-      // ThirdGenre: json["genres"][2]["name"]?? "",
-      vote_average: json["vote_average"],
+      Generes: json["genres"] ?? [],
+      vote_average: json["vote_average"] ?? 0,
     );
   }
 }

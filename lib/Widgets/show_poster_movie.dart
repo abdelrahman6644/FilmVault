@@ -9,12 +9,12 @@ class ShowPoster extends StatelessWidget {
     required this.Imageurl,
     required this.height,
     required this.width,
-    required this.movie,
+    required this.movieID,
   });
   String? Imageurl;
   final int width;
   final int height;
-  MovieModel movie;
+  int movieID;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -25,7 +25,7 @@ class ShowPoster extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => MovieView(
-                      id: movie.id!,
+                      id: movieID,
                     )),
           );
         },

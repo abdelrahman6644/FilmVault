@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/Models/movie_model.dart';
+import 'package:movies_app/Models/full_movie_model.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
 
 class MovieCard extends StatelessWidget {
-  MovieCard({super.key});
-  MovieModel movie = MovieModel(poster: '', id: 3);
+  MovieCard({super.key, required this.movie});
+  FullMovieModel movie;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -16,22 +16,30 @@ class MovieCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
             child: ShowPoster(
-              Imageurl: 'https://cdn.motor1.com/images/mgl/mrz1e/s1/coolest-cars-feature.webp',
+              Imageurl: movie.poster,
               height: 120,
-              width: 100, 
-              movie: movie ,
+              width: 100,
+              movieID: movie.id,
             ),
           ),
           SizedBox(
             width: 230,
             child: Column(
               children: [
-                Text(
-                  'Spider-Man : No Way Home',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.sp,
-                      overflow: TextOverflow.ellipsis),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 1.8,
+                      child: Text(
+                        movie.original_title ?? "",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.sp,
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 17,
@@ -44,7 +52,7 @@ class MovieCard extends StatelessWidget {
                       size: 14.sp,
                     ),
                     Text(
-                      ' 2021',
+                      ' ${movie.release_date!.substring(0, 4)}',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.sp,
@@ -60,23 +68,7 @@ class MovieCard extends StatelessWidget {
                       size: 14.sp,
                     ),
                     Text(
-                      ' 148 minutes',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.movie_rounded,
-                      color: Colors.grey,
-                      size: 14.sp,
-                    ),
-                    Text(
-                      ' Action',
+                      ' ${movie.vote_average}',
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 14.sp,

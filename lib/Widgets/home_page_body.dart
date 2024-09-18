@@ -20,7 +20,10 @@ class HomeBody extends StatelessWidget {
             if (value.isNotEmpty) {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const SearchPage()),
+                MaterialPageRoute(
+                    builder: (context) => SearchPage(
+                          movieName: value,
+                        )),
               );
             }
           },
