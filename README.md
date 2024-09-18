@@ -15,3 +15,15 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # Movies-App
+تطبيق لعرض الافلام عن طريق بعض التصنيفات زي 
+Upcoming 
+Trending 
+now playing 
+top rated 
+popular
+ وتقدر تبحث عن فيلم معين وتعرف عنه تفاصيل وبعض مراجعات الناس عليه 
+API :
+https://developer.themoviedb.org/docs/getting-started
+
+GitHub:
+https://github.com/abdelrahman6644/Movies-App
