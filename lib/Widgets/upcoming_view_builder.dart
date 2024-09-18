@@ -20,11 +20,14 @@ class _UpcomingRowState extends State<UpcomingRow> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: future,
-        builder: (context, snapshot) {
-          HandlingError screen = HandlingError(snapshot: snapshot);
-          return screen.ReturnRow();
-        });
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      child: FutureBuilder(
+          future: future,
+          builder: (context, snapshot) {
+            HandlingError screen = HandlingError(snapshot: snapshot);
+            return screen.ReturnRow();
+          }),
+    );
   }
 }

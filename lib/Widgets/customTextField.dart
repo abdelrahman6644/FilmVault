@@ -48,7 +48,9 @@ class textField extends StatelessWidget {
           fillColor: const Color(0xff3a3f47),
           hintText: hint,
           hintStyle: TextStyle(
-              color: const Color.fromARGB(255, 120, 118, 118), fontSize: 15.sp),
+            color: const Color.fromARGB(255, 120, 118, 118),
+            fontSize: 15.sp,
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(22.sp),
             borderSide: const BorderSide(

@@ -33,8 +33,8 @@ class ViewInRow extends StatelessWidget {
                   ),
                   ShowPoster(
                     Imageurl: movies[index].poster,
-                    height: 230,
-                    width: 140,
+                    height: 230.h,
+                    width: MediaQuery.of(context).size.width / 3,
                     movieID: movies[index].id ?? 0,
                   ),
                 ],

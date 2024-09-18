@@ -9,8 +9,11 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.only(top: 30.0, bottom: 0, left: 30.0, right: 10),
+      padding: const EdgeInsets.only(
+        top: 30.0,
+        bottom: 0,
+        left: 10.0,
+      ),
       child: Row(
         children: [
           Padding(
@@ -23,14 +26,14 @@ class MovieCard extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 230,
+            width: 230.w,
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: MediaQuery.of(context).size.width / 1.8,
+                      width: MediaQuery.of(context).size.width / 2,
                       child: Text(
                         movie.original_title ?? "",
                         style: TextStyle(

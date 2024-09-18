@@ -12,8 +12,8 @@ class ShowPoster extends StatelessWidget {
     required this.movieID,
   });
   String? Imageurl;
-  final int width;
-  final int height;
+  final double width;
+  final double height;
   int movieID;
   @override
   Widget build(BuildContext context) {
