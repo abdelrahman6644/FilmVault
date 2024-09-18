@@ -13,26 +13,34 @@ class ViewInRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30, left: 20),
+      padding: const EdgeInsets.only(bottom: 30),
       child: Container(
         padding: const EdgeInsets.only(
           top: 8,
         ),
         height: 190.h,
-        child: ListView.separated(
-          separatorBuilder: (context, index) => const SizedBox(
-            width: 30,
+        child: SizedBox(
+          height: 230,
+          width: MediaQuery.of(context).size.width,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: movies.length,
+            itemBuilder: (context, index) {
+              return Row(
+                children: [
+                  SizedBox(
+                    width: 16.w,
+                  ),
+                  ShowPoster(
+                    Imageurl: movies[index].poster,
+                    height: 230,
+                    width: 140,
+                    movieID: movies[index].id ?? 0,
+                  ),
+                ],
+              );
+            },
           ),
-          scrollDirection: Axis.horizontal,
-          itemCount: movies.length,
-          itemBuilder: (context, index) {
-            return ShowPoster(
-              Imageurl: movies[index].poster,
-              height: 230,
-              width: 140,
-              movieID: movies[index].id??0,
-            );
-          },
         ),
       ),
     );

@@ -17,27 +17,24 @@ class ShowPoster extends StatelessWidget {
   int movieID;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(left: 0.sp),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => MovieView(
-                      id: movieID,
-                    )),
-          );
-        },
-        child: Container(
-          // 140 , 200 = 7:10
-          width: width.sp,
-          height: height.sp,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(Imageurl!), fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(25),
-          ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MovieView(
+                    id: movieID,
+                  )),
+        );
+      },
+      child: Container(
+        // 140 , 200 = 7:10
+        width: width.sp,
+        height: height.sp,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: NetworkImage(Imageurl!), fit: BoxFit.cover),
+          borderRadius: BorderRadius.circular(25),
         ),
       ),
     );
@@ -64,10 +61,7 @@ class ShowPosterToDetailes extends StatelessWidget {
         height: height.sp,
         decoration: BoxDecoration(
           image:
-              DecorationImage(
-                image: NetworkImage(Imageurl),
-                fit: BoxFit.cover
-                ),
+              DecorationImage(image: NetworkImage(Imageurl), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(25),
         ),
       ),
