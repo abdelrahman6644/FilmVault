@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/movie_model.dart';
 import 'package:movies_app/Widgets/message_error.dart';
-import 'package:movies_app/Widgets/popular_movies.dart';
+import 'package:movies_app/Widgets/view_row.dart';
 
 class HandlingError {
   var snapshot;

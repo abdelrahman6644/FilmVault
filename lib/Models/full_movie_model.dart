@@ -19,6 +19,7 @@ class FullMovieModel {
       required this.overview,
       required this.Generes,
       required this.vote_average});
+      
   factory FullMovieModel.fromJson(json) {
     return FullMovieModel(
       poster: json["poster_path"],

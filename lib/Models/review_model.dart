@@ -1,6 +1,6 @@
 class ReviewModel {
   String author;
-  double rating;
+  double? rating;
   String content;
   ReviewModel({required this.author, required this.content, required this.rating});
 

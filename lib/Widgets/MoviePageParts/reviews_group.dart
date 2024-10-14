@@ -30,27 +30,23 @@ class _ReviewsGroupState extends State<ReviewsGroup> {
     return FutureBuilder<List<ReviewModel>>(
       future: future,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
+        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return SizedBox(
             height: MediaQuery.of(context).size.height / 1.2,
             child: ListView.builder(
               itemCount: snapshot.data != null ? snapshot.data!.length : 0,
               itemBuilder: (context, index) {
-                return snapshot.data != null
-                    ? ReviewMesssage(
-                        Username: snapshot.data![index].author,
-                        Rate: snapshot.data![index].rating,
-                        content: snapshot.data![index].content,
-                      )
-                    : const MessageError(
-                        Message: 'No Reviews Found',
-                      );
+                return ReviewMesssage(
+                  Username: snapshot.data![index].author,
+                  Rate: snapshot.data![index].rating ?? 0,
+                  content: snapshot.data![index].content,
+                );
               },
             ),
           );
-        } else if (snapshot.hasError) {
+        } else if (snapshot.hasData || snapshot.data == null) {
           return const MessageError(
-            Message: 'There Was an Error Please try Later',
+            Message: 'No Reviews Found',
           );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return Column(
@@ -60,10 +56,6 @@ class _ReviewsGroupState extends State<ReviewsGroup> {
               ),
               const Center(child: CircularProgressIndicator()),
             ],
-          );
-        } else if (snapshot.connectionState == ConnectionState.none) {
-          return const MessageError(
-            Message: 'There Was an Error Please try Later',
           );
         } else {
           return const MessageError(

@@ -5,17 +5,20 @@ class MessageError extends StatelessWidget {
   final String Message;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 230,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            Message,
-            style: const TextStyle(
-                fontSize: 25, color: Color.fromARGB(255, 231, 231, 133)),
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: SizedBox(
+        height: 230,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              Message,
+              style: const TextStyle(
+                  fontSize: 25, color: Color.fromARGB(255, 231, 231, 133)),
+            ),
+          ],
+        ),
       ),
     );
   }
