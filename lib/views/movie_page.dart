@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
 import 'package:movies_app/Widgets/MoviePageParts/under_page.dart';
+import 'package:movies_app/Widgets/custom_floating_action_buttom.dart';
 import 'package:movies_app/constants.dart';
 import 'package:movies_app/Widgets/MoviePageParts/top_of_movie_page.dart';
 
 class MoviePage extends StatelessWidget {
   MoviePage({super.key, required this.movie});
   FullMovieModel movie;
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     List<Widget> Generes = [];
@@ -30,67 +32,88 @@ class MoviePage extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return Scaffold(
-          backgroundColor: const Color(primaryColor),
-          appBar: AppBarMoviePage(),
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              children: [
-                TopOfPage(
-                  movie: movie,
+          floatingActionButton:
+              CustomFloatingActionButtom(scrollController: scrollController),
+          // backgroundColor: const Color(primaryColor),
+          // appBar: AppBarMoviePage(),
+          body: CustomScrollView(
+              controller: scrollController,
+              physics: const BouncingScrollPhysics(),
+              // scrollDirection: Axis.vertical,
+              slivers: [
+                const SliverAppBar(
+                  iconTheme: IconThemeData(
+                    color: Colors.cyan,
+                  ),
+                  pinned: true,
+                  expandedHeight: 120.0,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text(
+                      'Movie Details',
+                      style: TextStyle(
+                        fontSize: 22,
+                      ),
+                    ),
+                  ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.date_range_rounded,
-                      color: Colors.grey,
-                      size: 14.sp,
+                SliverToBoxAdapter(
+                  child: Column(children: [
+                    TopOfPage(
+                      movie: movie,
                     ),
-                    Text(
-                      ' ${movie.release_date != null && movie.release_date!.length >= 4 ? movie.release_date!.substring(0, 4) : 'Unknown'}',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.date_range_rounded,
+                          color: Colors.grey,
+                          size: 14.sp,
+                        ),
+                        Text(
+                          ' ${movie.release_date != null && movie.release_date!.length >= 4 ? movie.release_date!.substring(0, 4) : 'Unknown'}',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        Text(
+                          '  |  ',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        Icon(
+                          Icons.access_time_rounded,
+                          color: Colors.grey,
+                          size: 14.sp,
+                        ),
+                        Text(
+                          ' ${movie.runtime} minutes',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        Text(
+                          '  |  ',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        Column(
+                          children: genere(),
+                        )
+                      ],
                     ),
-                    Text(
-                      '  |  ',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
+                    UnderPage(
+                      movie: movie,
                     ),
-                    Icon(
-                      Icons.access_time_rounded,
-                      color: Colors.grey,
-                      size: 14.sp,
-                    ),
-                    Text(
-                      ' ${movie.runtime} minutes',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                    Text(
-                      '  |  ',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                    Column(
-                      children: genere(),
-                    )
-                  ],
-                ),
-                UnderPage(
-                  movie: movie,
-                ),
-              ],
-            ),
-          ),
+                  ]),
+                )
+              ]),
         );
       },
     );

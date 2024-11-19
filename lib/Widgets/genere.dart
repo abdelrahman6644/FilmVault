@@ -10,14 +10,14 @@ class Genere extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: isActive ? Colors.blue : const Color(primaryColor),
-        border: Border.all(color: const Color(primaryColor), width: 6),
+        color:
+            isActive ? Colors.blue : Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(16),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 13),
+      padding: const EdgeInsets.symmetric(horizontal: 22),
       child: Text(
         genres[index]["name"],
-        style: const TextStyle(color: Colors.white, fontSize: 20),
+        style: const TextStyle(fontSize: 20),
       ),
     );
   }

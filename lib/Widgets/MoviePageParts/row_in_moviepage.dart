@@ -19,8 +19,7 @@ class RowInMoviepage extends StatelessWidget {
           padding: const EdgeInsets.only(top: 40, left: 15),
           child: Text(
             text,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
           ),
         ),
         isActive

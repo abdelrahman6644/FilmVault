@@ -9,62 +9,80 @@ class HomeBody extends StatelessWidget {
   HomeBody({super.key});
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(children: [
-        textField(
-          hint: 'Search',
-          onChanged: (String name) {},
-          icon: Icons.search,
-          onFieldSubmitted: (String value) {
-            if (value.isNotEmpty) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => SearchPage(
-                          movieName: value,
-                        )),
-              );
-            }
-          },
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        const Row(
-          children: [
-            SizedBox(
-              width: 25,
+    return CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        slivers: [
+          const SliverAppBar(
+            iconTheme: IconThemeData(
+              color: Colors.cyan,
             ),
-            Text(
-              'Trending',
-              style: TextStyle(
-                fontSize: 26,
-                color: Colors.white,
+            pinned: true,
+            expandedHeight: 110.0,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              title: Text(
+                'Movies',
+                style: TextStyle(
+                  fontSize: 28,
+                ),
               ),
             ),
-            Spacer(),
-          ],
-        ),
-        const TrendingRow(),
-        const Row(
-          children: [
-            SizedBox(
-              width: 25,
-            ),
-            Text(
-              'Upcoming',
-              style: TextStyle(
-                fontSize: 26,
-                color: Colors.white,
+          ),
+          SliverToBoxAdapter(
+            child: Column(children: [
+              textField(
+                hint: 'Search',
+                onChanged: (String name) {},
+                icon: Icons.search,
+                onFieldSubmitted: (String value) {
+                  if (value.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SearchPage(
+                                movieName: value,
+                              )),
+                    );
+                  }
+                },
               ),
-            ),
-            Spacer(),
-          ],
-        ),
-        const UpcomingRow(),
-        ShowMoviesByGenere(),
-      ]),
-    );
+              const SizedBox(
+                height: 5,
+              ),
+              const Row(
+                children: [
+                  SizedBox(
+                    width: 25,
+                  ),
+                  Text(
+                    'Trending',
+                    style: TextStyle(
+                      fontSize: 26,
+                    ),
+                  ),
+                  Spacer(),
+                ],
+              ),
+              const TrendingRow(),
+              const Row(
+                children: [
+                  SizedBox(
+                    width: 25,
+                  ),
+                  Text(
+                    'Upcoming',
+                    style: TextStyle(
+                      fontSize: 26,
+                    ),
+                  ),
+                  Spacer(),
+                ],
+              ),
+              const UpcomingRow(),
+              ShowMoviesByGenere(),
+            ]),
+          ),
+        ]);
   }
 }

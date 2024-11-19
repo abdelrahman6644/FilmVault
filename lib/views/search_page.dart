@@ -6,6 +6,7 @@ import 'package:movies_app/Providers/search_provider.dart';
 import 'package:movies_app/Services/APIs/search_api.dart';
 import 'package:movies_app/Widgets/MoviePageParts/movie_view_builder.dart';
 import 'package:movies_app/Widgets/customTextField.dart';
+import 'package:movies_app/Widgets/custom_floating_action_buttom.dart';
 import 'package:movies_app/Widgets/message_error.dart';
 import 'package:movies_app/Widgets/movie_card.dart';
 import 'package:movies_app/constants.dart';
@@ -21,6 +22,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(context) {
     widget.future = SearchService(Dio()).getSearchMovie(widget.movieName);
@@ -28,13 +30,17 @@ class _SearchPageState extends State<SearchPage> {
       widget.movieName;
     });
     return Scaffold(
-      backgroundColor: const Color(primaryColor),
+      floatingActionButton: CustomFloatingActionButtom(
+        scrollController: scrollController,
+      ),
+      // backgroundColor: const Color(primaryColor),
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.cyan,
         ),
       ),
       body: SingleChildScrollView(
+        controller: scrollController,
         child: Column(
           children: [
             textField(

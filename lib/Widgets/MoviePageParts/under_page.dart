@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
 import 'package:movies_app/Widgets/MoviePageParts/reviews_group.dart';
 import 'package:movies_app/Widgets/MoviePageParts/row_in_moviepage.dart';
+
 class UnderPage extends StatefulWidget {
   UnderPage({super.key, required this.movie});
   FullMovieModel movie;
@@ -10,7 +12,6 @@ class UnderPage extends StatefulWidget {
   @override
   State<UnderPage> createState() => _UnderPageState();
 }
-
 
 class _UnderPageState extends State<UnderPage> {
   @override
@@ -56,10 +57,11 @@ class _UnderPageState extends State<UnderPage> {
         ),
         widget.isActive
             ? Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.only(
+                    top: 12.0, right: 12, left: 12, bottom: 500),
                 child: Text(
                   widget.movie.overview ?? "",
-                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                  style: TextStyle(fontSize: 16.sp),
                 ),
               )
             : ReviewsGroup(

@@ -32,21 +32,21 @@ class _ReviewsGroupState extends State<ReviewsGroup> {
       builder: (context, snapshot) {
         if (snapshot.hasData && snapshot.data!.isNotEmpty) {
           return SizedBox(
-            height: MediaQuery.of(context).size.height / 1.2,
-            child: ListView.builder(
-              itemCount: snapshot.data != null ? snapshot.data!.length : 0,
-              itemBuilder: (context, index) {
-                return ReviewMesssage(
-                  Username: snapshot.data![index].author,
-                  Rate: snapshot.data![index].rating ?? 0,
-                  content: snapshot.data![index].content,
-                );
-              },
+            child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                children: List.generate(
+                  snapshot.data != null ? snapshot.data!.length : 0,
+                  (index) {
+                    return ReviewMesssage(
+                      Username: snapshot.data![index].author,
+                      Rate: snapshot.data![index].rating ?? 0,
+                      content: snapshot.data![index].content,
+                    );
+                  },
+                ),
+              ),
             ),
-          );
-        } else if (snapshot.hasData || snapshot.data == null) {
-          return const MessageError(
-            Message: 'No Reviews Found',
           );
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return Column(
@@ -56,6 +56,10 @@ class _ReviewsGroupState extends State<ReviewsGroup> {
               ),
               const Center(child: CircularProgressIndicator()),
             ],
+          );
+        } else if (snapshot.hasData || snapshot.data == null) {
+          return const MessageError(
+            Message: 'No Reviews Found',
           );
         } else {
           return const MessageError(

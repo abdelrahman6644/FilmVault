@@ -10,9 +10,8 @@ class textField extends StatelessWidget {
       required this.onChanged,
       required this.icon,
       required this.onFieldSubmitted});
-  final regExp = RegExp(
-      r'[\^$*.\[\]{}()?\-"!@#%&/\,><:;_~`+=' // <-- Notice the escaped symbols
-      "'" // <-- ' is added to the expression
+  final regExp = RegExp(r'[\^$*.\[\]{}()?\-"!@#%&/\,><:;_~`+='
+      "'"
       ']');
   final void Function(String)? onFieldSubmitted;
   IconData icon;
@@ -23,8 +22,7 @@ class textField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       child: TextFormField(
-        //maxLength: 1,
-        style: const TextStyle(color: Colors.white),
+        autofocus: false,
         validator: (data) {
           if (data!.isEmpty) {
             return 'value is empty';
@@ -39,13 +37,11 @@ class textField extends StatelessWidget {
         onFieldSubmitted: onFieldSubmitted,
         cursorColor: Colors.grey,
         decoration: InputDecoration(
-          //isCollapsed: true,
           suffixIcon: Icon(
             icon,
             color: const Color.fromARGB(255, 120, 118, 118),
           ),
           filled: true,
-          fillColor: const Color(0xff3a3f47),
           hintText: hint,
           hintStyle: TextStyle(
             color: const Color.fromARGB(255, 120, 118, 118),

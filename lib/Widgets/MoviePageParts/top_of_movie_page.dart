@@ -51,13 +51,12 @@ class TopOfPage extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
               ),
             ),
           ),
           Positioned(
-              top: 200.sp,
-              left: 300.sp,
+              top: 175.h,
+              left: 300.w,
               child: Container(
                 width: 60,
                 height: 28,
@@ -95,24 +94,3 @@ class TopOfPage extends StatelessWidget {
     );
   }
 }
-
-// bool isFav = false;
-
-// IconButton(
-//   icon: isFav == false
-//       ? const Icon(
-//           Icons.favorite,
-//           color: Colors.red,
-//           size: 30,
-//         )
-//       : const Icon(
-//           Icons.favorite_border,
-//           color: Colors.red,
-//           size: 30,
-//         ),
-//   onPressed: () {
-//     setState(() {
-//       isFav ? false : true;
-//     });
-//   },
-// )
