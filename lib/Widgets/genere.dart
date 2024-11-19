@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/DataBase/generes_types.dart';
-import 'package:movies_app/constants.dart';
 
 class Genere extends StatelessWidget {
   const Genere({super.key, required this.index, this.isActive = false});

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
 import 'package:movies_app/Widgets/MoviePageParts/under_page.dart';
 import 'package:movies_app/Widgets/custom_floating_action_buttom.dart';
-import 'package:movies_app/constants.dart';
 import 'package:movies_app/Widgets/MoviePageParts/top_of_movie_page.dart';
 
 class MoviePage extends StatelessWidget {

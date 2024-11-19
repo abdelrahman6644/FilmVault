@@ -9,7 +9,6 @@ import 'package:movies_app/Widgets/customTextField.dart';
 import 'package:movies_app/Widgets/custom_floating_action_buttom.dart';
 import 'package:movies_app/Widgets/message_error.dart';
 import 'package:movies_app/Widgets/movie_card.dart';
-import 'package:movies_app/constants.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
