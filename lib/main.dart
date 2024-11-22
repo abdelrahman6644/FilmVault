@@ -5,6 +5,7 @@ import 'package:movies_app/views/HomePage.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  
   WidgetsFlutterBinding.ensureInitialized();
 
   final savedThemeMode = await AdaptiveTheme.getThemeMode();

@@ -32,7 +32,6 @@ class _SearchPageState extends State<SearchPage> {
       floatingActionButton: CustomFloatingActionButtom(
         scrollController: scrollController,
       ),
-      // backgroundColor: const Color(primaryColor),
       appBar: AppBar(
         iconTheme: const IconThemeData(
           color: Colors.cyan,

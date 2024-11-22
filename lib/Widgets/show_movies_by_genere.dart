@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/DataBase/generes_types.dart';
-import 'package:movies_app/Models/movie_model.dart';
+import 'package:movies_app/Models/full_movie_model.dart';
+import 'package:movies_app/Models/movies_model.dart';
 import 'package:movies_app/Services/APIs/upcoming_api.dart';
 import 'package:movies_app/Widgets/genere.dart';
 import 'package:movies_app/Widgets/message_error.dart';
@@ -76,7 +77,7 @@ class _GenereBuilderState extends State<GenereBuilder> {
 
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: FutureBuilder<List<MovieModel>>(
+      child: FutureBuilder<List<FullMovieModel>>(
           future: widget.future,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -92,16 +93,18 @@ class _GenereBuilderState extends State<GenereBuilder> {
                     Imageurl: posterUrl + (snapshot.data?[index].poster ?? ""),
                     height: 200,
                     width: 110,
-                    movieID: snapshot.data![index].id??0,
+                    movie: snapshot.data![index],
                   ),
                 ),
               );
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
+              return Container(
+                  padding: const EdgeInsets.all(30),
+                  child: const Center(child: CircularProgressIndicator()));
             } else if (snapshot.hasError) {
               return const MessageError(
                 Message: 'There Was an Error Please try Later',
               );
-            } else if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
             } else if (snapshot.connectionState == ConnectionState.none) {
               return const MessageError(
                 Message: 'The Internet Lost',

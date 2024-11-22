@@ -11,12 +11,16 @@ class CustomFloatingActionButtom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Colors.cyan,
+      mini: true,
+      tooltip: "Go Up",
+      splashColor: Colors.cyan,
+      enableFeedback: true,
+      backgroundColor: Colors.blue,
       onPressed: () {
         scrollController.animateTo(2,
-            duration: Duration(seconds: 1), curve: Curves.easeInOut);
+            duration: const Duration(seconds: 1), curve: Curves.easeInOut);
       },
-      child: const Icon(Icons.upgrade_outlined),
+      child: const Icon(Icons.arrow_upward_sharp),
     );
   }
 }

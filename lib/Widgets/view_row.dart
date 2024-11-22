@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies_app/Models/movie_model.dart';
+import 'package:movies_app/Models/full_movie_model.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
 
 class ViewInRow extends StatelessWidget {
@@ -8,7 +8,7 @@ class ViewInRow extends StatelessWidget {
     super.key,
     required this.movies,
   });
-  final List<MovieModel> movies;
+  final List<FullMovieModel> movies;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class ViewInRow extends StatelessWidget {
                     Imageurl: movies[index].poster,
                     height: 230.h,
                     width: MediaQuery.of(context).size.width / 3,
-                    movieID: movies[index].id ?? 0,
+                    movie: movies[index],
                   ),
                 ],
               );

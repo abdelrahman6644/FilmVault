@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:movies_app/Models/movie_model.dart';
+import 'package:movies_app/Models/full_movie_model.dart';
+import 'package:movies_app/Models/movies_model.dart';
 import 'package:movies_app/constants.dart';
 
 class UpcomingApi {
@@ -14,19 +15,19 @@ class UpcomingApi {
    */
   UpcomingApi(this.dio, {required this.type});
 
-  Future<List<MovieModel>> getUpcomingMovies() async {
+  Future<List<FullMovieModel>> getUpcomingMovies() async {
     try {
       var response = await dio
           .get('https://api.themoviedb.org/3/movie/$type?api_key=$apiKey');
       Map<String, dynamic> jsonData = response.data;
       List<dynamic> Movies = jsonData["results"];
-      List<MovieModel> UpcomingMovies = [];
+      List<FullMovieModel> UpcomingMovies = [];
       for (var movie in Movies) {
-        UpcomingMovies.add(MovieModel.fromJson(movie));
+        UpcomingMovies.add(FullMovieModel.fromJson(movie));
       }
-        for(var mo in UpcomingMovies){
-      mo.poster = posterUrl + mo.poster;
-    }
+      for (var mo in UpcomingMovies) {
+        mo.poster = posterUrl + mo.poster;
+      }
       return UpcomingMovies;
     } catch (e) {
       return [];

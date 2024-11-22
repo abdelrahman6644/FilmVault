@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Widgets/home_page_body.dart';
 import 'package:movies_app/constants.dart';
+import 'package:movies_app/views/favorite.dart';
 import 'package:movies_app/views/settings.dart';
 
 class MovieApp extends StatefulWidget {
@@ -55,7 +56,7 @@ class _MovieAppState extends State<MovieApp> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Movies",
+                              appName,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 24,
@@ -130,12 +131,7 @@ class _MovieAppState extends State<MovieApp> {
       case 0:
         return HomeBody();
       case 1:
-        return const Center(
-          child: Text(
-            "Favorites Page",
-            style: TextStyle(color: Colors.white, fontSize: 24),
-          ),
-        );
+        return FavoriteMovies() ;
       case 2:
         return const Settings();
       default:

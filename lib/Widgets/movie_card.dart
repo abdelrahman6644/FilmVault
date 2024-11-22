@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
+import 'package:movies_app/Widgets/isFavIcon.dart';
 import 'package:movies_app/Widgets/show_poster_movie.dart';
 
 class MovieCard extends StatelessWidget {
@@ -22,60 +23,29 @@ class MovieCard extends StatelessWidget {
               Imageurl: movie.poster,
               height: 120,
               width: 100,
-              movieID: movie.id,
+              movie: movie,
+              favoriteEnable: false,
             ),
           ),
           SizedBox(
             width: 230.w,
             child: Column(
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: Text(
-                        movie.original_title ?? "",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20.sp,
-                            overflow: TextOverflow.ellipsis),
-                      ),
-                    ),
-                  ],
-                ),
+                Title(movie: movie),
                 const SizedBox(
                   height: 17,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.date_range_rounded,
-                      color: Colors.grey,
-                      size: 14.sp,
+                    Column(
+                      children: [
+                        ReleaseDate(movie: movie),
+                        Review(movie: movie),
+                      ],
                     ),
-                    Text(
-                      ' ${movie.release_date!.substring(0, 4)}',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_time_rounded,
-                      color: Colors.grey,
-                      size: 14.sp,
-                    ),
-                    Text(
-                      ' ${movie.vote_average}',
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 14.sp,
-                      ),
+                    IsfavIcon(
+                      movie: movie,
                     ),
                   ],
                 ),
@@ -84,6 +54,89 @@ class MovieCard extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class Title extends StatelessWidget {
+  const Title({
+    super.key,
+    required this.movie,
+  });
+
+  final FullMovieModel movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width / 2,
+          child: Text(
+            movie.original_title ?? "",
+            style: TextStyle(fontSize: 20.sp, overflow: TextOverflow.ellipsis),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ReleaseDate extends StatelessWidget {
+  const ReleaseDate({
+    super.key,
+    required this.movie,
+  });
+
+  final FullMovieModel movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          Icons.date_range_rounded,
+          color: Colors.grey,
+          size: 14.sp,
+        ),
+        Text(
+          ' ${movie.release_date!.substring(0, 4)}',
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 14.sp,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Review extends StatelessWidget {
+  const Review({
+    super.key,
+    required this.movie,
+  });
+
+  final FullMovieModel movie;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Icon(
+          Icons.rate_review,
+          color: Colors.grey,
+          size: 14.sp,
+        ),
+        Text(
+          ' ${movie.vote_average}',
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 14.sp,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:movies_app/Widgets/customTextField.dart';
 import 'package:movies_app/Widgets/show_movies_by_genere.dart';
 import 'package:movies_app/Widgets/trending_view_builder.dart';
 import 'package:movies_app/Widgets/upcoming_view_builder.dart';
+import 'package:movies_app/constants.dart';
 import 'package:movies_app/views/search_page.dart';
 
 class HomeBody extends StatelessWidget {
@@ -22,7 +23,7 @@ class HomeBody extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
               title: Text(
-                'Movies',
+                appName,
                 style: TextStyle(
                   fontSize: 28,
                 ),

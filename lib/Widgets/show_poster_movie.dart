@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies_app/Models/full_movie_model.dart';
 import 'package:movies_app/Widgets/MoviePageParts/movie_view_builder.dart';
+import 'package:movies_app/Widgets/isFavIcon.dart';
 
 class ShowPoster extends StatelessWidget {
-  ShowPoster({
-    super.key,
-    required this.Imageurl,
-    required this.height,
-    required this.width,
-    required this.movieID,
-  });
+  ShowPoster(
+      {super.key,
+      required this.Imageurl,
+      required this.height,
+      required this.width,
+      required this.movie,
+      this.favoriteEnable = true});
+  bool favoriteEnable;
+
   String? Imageurl;
   final double width;
   final double height;
-  int movieID;
+  FullMovieModel movie;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,19 +26,31 @@ class ShowPoster extends StatelessWidget {
           context,
           MaterialPageRoute(
               builder: (context) => MovieView(
-                    id: movieID,
+                    id: movie.id,
                   )),
         );
       },
-      child: Container(
-        // 140 , 200 = 7:10
-        width: width.sp,
-        height: height.sp,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: NetworkImage(Imageurl!), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(25),
-        ),
+      child: Stack(
+        children: [
+          Container(
+            // 140 , 200 = 7:10
+            width: width.sp,
+            height: height.sp,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(Imageurl!), fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(25),
+            ),
+          ),
+          favoriteEnable
+              ? Positioned(
+                  right: MediaQuery.sizeOf(context).width / 100,
+                  child: IsfavIcon(
+                    movie: movie,
+                  ),
+                )
+              : Container()
+        ],
       ),
     );
   }
