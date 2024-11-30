@@ -22,6 +22,8 @@ now playing
 top rated 
 popular
  وتقدر تبحث عن فيلم معين وتعرف عنه تفاصيل وبعض مراجعات الناس عليه 
+ وكمان تقدر تحتفظ بالافلام الي عجباك
+ يدعم ال light and dark mode
 API :
 https://developer.themoviedb.org/docs/getting-started
 
