@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/DataBase/generes_types.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
-import 'package:movies_app/Models/movies_model.dart';
 import 'package:movies_app/Services/APIs/upcoming_api.dart';
 import 'package:movies_app/Widgets/genere.dart';
 import 'package:movies_app/Widgets/message_error.dart';

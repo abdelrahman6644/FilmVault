@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
-import 'package:movies_app/Models/movies_model.dart';
 import 'package:movies_app/constants.dart';
 
 class TrendingApi {

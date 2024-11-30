@@ -1,29 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
-import 'package:movies_app/constants.dart';
 
-class IsfavIcon extends StatefulWidget {
-  IsfavIcon({super.key, required this.movie});
-  FullMovieModel movie;
+class IsFavIcon extends StatefulWidget {
+  const IsFavIcon({super.key, required this.movie});
+  final FullMovieModel movie;
+
   @override
-  State<IsfavIcon> createState() => _IsfavIconState();
+  State<IsFavIcon> createState() => _IsFavIconState();
 }
 
-class _IsfavIconState extends State<IsfavIcon> {
-  bool isFav = false;
+class _IsFavIconState extends State<IsFavIcon> {
+  Box<FullMovieModel>? favoriteMoviesBox;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Open the box
+    Hive.openBox<FullMovieModel>('favoritesBox').then((box) {
+      setState(() {
+        favoriteMoviesBox = box;
+      });
+    });
+  }
+
+  bool isFavorite() {
+    // Check if the movie exists in the box
+    if (favoriteMoviesBox == null) return false;
+    return favoriteMoviesBox!.containsKey(widget.movie.id);
+  }
+
+  void toggleFavorite() {
+    if (favoriteMoviesBox == null) return;
+
+    if (isFavorite()) {
+      // Remove the movie from favorites
+      favoriteMoviesBox!.delete(widget.movie.id);
+    } else {
+      // Add the movie to favorites
+      favoriteMoviesBox!.put(widget.movie.id, widget.movie);
+    }
+
+    // Trigger a UI update
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(
-        isFav ? Icons.favorite : Icons.favorite_border,
+        isFavorite() ? Icons.favorite : Icons.favorite_border,
         color: Colors.red,
       ),
-      onPressed: () {
-        FavMovies.add(widget.movie);
-        setState(() {
-          isFav == true ? isFav = false : isFav = true;
-        });
-      },
+      onPressed: toggleFavorite,
     );
   }
 }

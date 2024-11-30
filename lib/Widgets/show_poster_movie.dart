@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
 import 'package:movies_app/Widgets/MoviePageParts/movie_view_builder.dart';
-import 'package:movies_app/Widgets/isFavIcon.dart';
+
+import 'isFavIcon.dart';
 
 class ShowPoster extends StatelessWidget {
   ShowPoster(
@@ -45,7 +46,7 @@ class ShowPoster extends StatelessWidget {
           favoriteEnable
               ? Positioned(
                   right: MediaQuery.sizeOf(context).width / 100,
-                  child: IsfavIcon(
+                  child: IsFavIcon(
                     movie: movie,
                   ),
                 )

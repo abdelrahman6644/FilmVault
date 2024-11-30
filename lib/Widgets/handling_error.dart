@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
-import 'package:movies_app/Models/movies_model.dart';
 import 'package:movies_app/Widgets/message_error.dart';
 import 'package:movies_app/Widgets/view_row.dart';
 

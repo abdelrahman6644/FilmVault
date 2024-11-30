@@ -20,7 +20,7 @@ class MovieApi {
           }
         }
       }
-      Movies.poster = posterUrl + Movies.poster!;
+      Movies.poster = posterUrl + Movies.poster;
       Movies.backGround = posterUrl + Movies.backGround!;
 
       return Movies;

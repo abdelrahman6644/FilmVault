@@ -131,7 +131,7 @@ class _MovieAppState extends State<MovieApp> {
       case 0:
         return HomeBody();
       case 1:
-        return FavoriteMovies() ;
+        return const FavoriteMovies() ;
       case 2:
         return const Settings();
       default:

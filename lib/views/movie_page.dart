@@ -33,12 +33,9 @@ class MoviePage extends StatelessWidget {
         return Scaffold(
           floatingActionButton:
               CustomFloatingActionButtom(scrollController: scrollController),
-          // backgroundColor: const Color(primaryColor),
-          // appBar: AppBarMoviePage(),
           body: CustomScrollView(
               controller: scrollController,
               physics: const BouncingScrollPhysics(),
-              // scrollDirection: Axis.vertical,
               slivers: [
                 const SliverAppBar(
                   iconTheme: IconThemeData(

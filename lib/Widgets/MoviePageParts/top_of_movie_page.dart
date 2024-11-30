@@ -14,7 +14,7 @@ class TopOfPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double d = movie.vote_average;
     String movieVote = d.toStringAsFixed(2);
-    String poster = movie.poster!;
+    String poster = movie.poster;
     String background = movie.backGround!;
     return SizedBox(
       height: 300.h,
@@ -27,7 +27,7 @@ class TopOfPage extends StatelessWidget {
           MovieVote(movieVote: movieVote),
           Positioned(
             right: MediaQuery.sizeOf(context).width / 13,
-            child: IsfavIcon(
+            child: IsFavIcon(
               movie: movie,
             ),
           )
@@ -102,8 +102,8 @@ class MovieVote extends StatelessWidget {
         top: 175.h,
         right: MediaQuery.sizeOf(context).width / 13,
         child: Container(
-          width: 60,
-          height: 28,
+          width: 70,
+          height: 30,
           decoration: BoxDecoration(
             color: const Color(0xff373740),
             borderRadius: BorderRadius.circular(8),

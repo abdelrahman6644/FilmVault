@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/Models/full_movie_model.dart';
-import 'package:movies_app/Models/movies_model.dart';
 import 'package:movies_app/Services/APIs/trending_api.dart';
 import 'package:movies_app/Widgets/handling_error.dart';
 

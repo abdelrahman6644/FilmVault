@@ -44,7 +44,7 @@ class MovieCard extends StatelessWidget {
                         Review(movie: movie),
                       ],
                     ),
-                    IsfavIcon(
+                    IsFavIcon(
                       movie: movie,
                     ),
                   ],
@@ -101,7 +101,7 @@ class ReleaseDate extends StatelessWidget {
           size: 14.sp,
         ),
         Text(
-          ' ${movie.release_date!.substring(0, 4)}',
+          ' ${movie.release_date!}',
           style: TextStyle(
             color: Colors.grey,
             fontSize: 14.sp,
